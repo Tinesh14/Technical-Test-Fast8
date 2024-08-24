@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:payuung_pribadi/cart_page.dart';
-import 'package:payuung_pribadi/list_friend_page.dart';
-import 'package:payuung_pribadi/list_transaction_page.dart';
-import 'package:payuung_pribadi/my_voucher_page.dart';
-import 'package:payuung_pribadi/shipping_addres_page.dart';
+import 'package:payuung_pribadi/pages/cart_page.dart';
+import 'package:payuung_pribadi/pages/list_friend_page.dart';
+import 'package:payuung_pribadi/pages/list_transaction_page.dart';
+import 'package:payuung_pribadi/pages/my_voucher_page.dart';
+import 'package:payuung_pribadi/pages/shipping_addres_page.dart';
 
-import 'home_page.dart';
-import 'search_page.dart';
+import 'home/home_page.dart';
+import 'pages/search_page.dart';
 
 class BottomNavBarWithScrollableGridMenu extends StatefulWidget {
   const BottomNavBarWithScrollableGridMenu({super.key});
@@ -79,6 +79,15 @@ class _BottomNavBarWithScrollableGridMenuState
 
   @override
   Widget build(BuildContext context) {
+    // FlutterView view = WidgetsBinding.instance.platformDispatcher.views.first;
+    // Dimensions in physical pixels (px)
+    // Size size = view.physicalSize;
+    // double width = size.width;
+    // double height = size.height;
+    // // Dimensions in logical pixels (dp)
+    // Size size = view.physicalSize / view.devicePixelRatio;
+    // double width = size.width;
+    // double height = size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -108,42 +117,47 @@ class _BottomNavBarWithScrollableGridMenuState
                           ),
                         ],
                       ),
-                      child: GridView.builder(
-                        padding: const EdgeInsets.only(top: 12),
-                        controller: scrollController,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3, // Number of columns in the grid
-                          childAspectRatio: 1.5, // Ratio of width to height
-                          mainAxisSpacing: 20,
-                        ),
-                        itemCount: _allMenuItems.length,
-                        itemBuilder: (context, index) {
-                          return Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                // Handle navigation or other actions here
-                                setState(() {
-                                  _currentIndex = index;
-                                });
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  _allMenuItems[index].icon,
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    _allMenuItems[index].label!,
-                                    style: const TextStyle(fontSize: 12),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                      child: LayoutBuilder(builder: (context, constraints) {
+                        int columns = (constraints.maxWidth / 150).floor();
+                        columns =
+                            columns < 3 ? 3 : columns; // Minimum 2 columns
+                        return GridView.builder(
+                          padding: const EdgeInsets.only(top: 12),
+                          controller: scrollController,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: columns,
+                            childAspectRatio: 1.5, // Ratio of width to height
+                            mainAxisSpacing: 20,
+                          ),
+                          itemCount: _allMenuItems.length,
+                          itemBuilder: (context, index) {
+                            return Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  // Handle navigation or other actions here
+                                  setState(() {
+                                    _currentIndex = index;
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    _allMenuItems[index].icon,
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      _allMenuItems[index].label!,
+                                      style: const TextStyle(fontSize: 12),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        );
+                      }),
                     ),
                     Positioned.fill(
                       top: 0,
