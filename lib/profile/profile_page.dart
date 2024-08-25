@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'update_profile_page.dart';
 
@@ -10,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  double iconSize = 25;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,14 +83,25 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     );
                   },
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/informasi-pribadi.svg',
+                        semanticsLabel: 'Informasi Pribadi',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Color(0xff7D838B), BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Informasi Pribadi'),
+                    title: const Text('Informasi Pribadi'),
                   ),
                 ),
                 const SizedBox(
@@ -96,14 +109,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/syarat-dan-ketentuan.svg',
+                        semanticsLabel: 'Syarat & Ketentuan',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Color(0xff7D838B), BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Syarat & Ketentuan'),
+                    title: const Text('Syarat & Ketentuan'),
                   ),
                 ),
                 const SizedBox(
@@ -111,14 +135,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/bantuan.svg',
+                        semanticsLabel: 'Bantuan',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Color(0xff7D838B), BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Bantuan'),
+                    title: const Text('Bantuan'),
                   ),
                 ),
                 const SizedBox(
@@ -126,14 +161,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/kebijakan-privasi.svg',
+                        semanticsLabel: 'Kebijakan Privasi',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Color(0xff7D838B), BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Kebijakan Privasi'),
+                    title: const Text('Kebijakan Privasi'),
                   ),
                 ),
                 const SizedBox(
@@ -141,14 +187,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/log-out.svg',
+                        semanticsLabel: 'Log Out',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Color(0xff7D838B), BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Log Out'),
+                    title: const Text('Log Out'),
                   ),
                 ),
                 const SizedBox(
@@ -156,14 +213,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: const ListTile(
-                    shape: RoundedRectangleBorder(
+                  child: ListTile(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     tileColor: Colors.white,
-                    leading: Icon(
-                      Icons.person,
+                    leading: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Color(0xffE5EAED),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/profile/hapus-akun.svg',
+                        semanticsLabel: 'Hapus Akun',
+                        height: iconSize,
+                        colorFilter: const ColorFilter.mode(
+                            Colors.black26, BlendMode.srcIn),
+                      ),
                     ),
-                    title: Text('Hapus Akun'),
+                    title: const Text('Hapus Akun'),
                   ),
                 ),
               ],

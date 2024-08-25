@@ -18,20 +18,34 @@ class BottomNavBarWithScrollableGridMenu extends StatefulWidget {
 
 class _BottomNavBarWithScrollableGridMenuState
     extends State<BottomNavBarWithScrollableGridMenu> {
-  final List<BottomNavigationBarItem> _allMenuItems = [
-    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Cari'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.shopping_cart), label: 'Keranjang'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.message), label: 'Daftar Transaksi'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.person), label: 'Voucher Saya'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.settings), label: 'Alamat Pengiriman'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.info), label: 'Daftar Teman'),
-  ];
+  List<BottomNavigationBarItem> _allMenuItems(bool p0) => [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Beranda'),
+        BottomNavigationBarItem(
+            icon:
+                Icon(Icons.search, color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Cari'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart,
+                color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Keranjang'),
+        BottomNavigationBarItem(
+            icon:
+                Icon(Icons.message, color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Daftar Transaksi'),
+        BottomNavigationBarItem(
+            icon:
+                Icon(Icons.person, color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Voucher Saya'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.settings,
+                color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Alamat Pengiriman'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.info, color: p0 ? const Color(0xffF6C20A) : null),
+            label: 'Daftar Teman'),
+      ];
 
   final List<Widget> _pages = const [
     HomePage(),
@@ -79,15 +93,6 @@ class _BottomNavBarWithScrollableGridMenuState
 
   @override
   Widget build(BuildContext context) {
-    // FlutterView view = WidgetsBinding.instance.platformDispatcher.views.first;
-    // Dimensions in physical pixels (px)
-    // Size size = view.physicalSize;
-    // double width = size.width;
-    // double height = size.height;
-    // // Dimensions in logical pixels (dp)
-    // Size size = view.physicalSize / view.devicePixelRatio;
-    // double width = size.width;
-    // double height = size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -130,8 +135,10 @@ class _BottomNavBarWithScrollableGridMenuState
                             childAspectRatio: 1.5, // Ratio of width to height
                             mainAxisSpacing: 20,
                           ),
-                          itemCount: _allMenuItems.length,
+                          itemCount: _allMenuItems.call(false).length,
                           itemBuilder: (context, index) {
+                            bool isActive = _currentIndex == index;
+                            var item = _allMenuItems.call(isActive)[index];
                             return Material(
                               color: Colors.transparent,
                               child: InkWell(
@@ -144,11 +151,16 @@ class _BottomNavBarWithScrollableGridMenuState
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    _allMenuItems[index].icon,
+                                    isActive ? item.icon : item.activeIcon,
                                     const SizedBox(height: 8),
                                     Text(
-                                      _allMenuItems[index].label!,
-                                      style: const TextStyle(fontSize: 12),
+                                      item.label!,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: isActive
+                                            ? const Color(0xffF6C20A)
+                                            : null,
+                                      ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],

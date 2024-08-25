@@ -1,6 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:payuung_pribadi/profile/profile_page.dart';
 
 import '../widget/responsive_grid_view.dart';
@@ -13,6 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  double iconSize = 35;
+  int activePageIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 //     // First get the FlutterView.
@@ -59,13 +66,15 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Icon(
-                        Icons.notifications_none,
-                        size: 30,
-                        color: Colors.white,
+                      SvgPicture.asset(
+                        'assets/home/notification.svg',
+                        semanticsLabel: 'Notification',
+                        height: 40,
+                        colorFilter: const ColorFilter.mode(
+                            Colors.white, BlendMode.srcIn),
                       ),
                       const SizedBox(
-                        width: 20,
+                        width: 10,
                       ),
                       InkWell(
                         onTap: () {
@@ -110,80 +119,256 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal: 15),
-                      child: Text(
-                        "Produk Keuangan",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: _menuBar(context)),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Padding(
+                        padding:
+                            EdgeInsetsDirectional.symmetric(horizontal: 15),
+                        child: Text(
+                          "Produk Keuangan",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 5),
-                      height: 200,
-                      child: ResponsiveGridView(
-                        items: [
-                          GridItem(icon: Icons.home, label: 'Urun'),
-                          GridItem(
-                              icon: Icons.search,
-                              label: 'Pembiayaan Porsi Haji'),
-                          GridItem(
-                              icon: Icons.notifications,
-                              label: 'Financial Check Up'),
-                          GridItem(
-                              icon: Icons.message, label: 'Asuransi Mobil'),
-                          GridItem(
-                              icon: Icons.person, label: 'Asuransi Properti'),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsetsDirectional.symmetric(horizontal: 15),
-                      child: Text(
-                        "Kategori Pilihan",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 5),
+                        height: 200,
+                        child: ResponsiveGridView(
+                          items: [
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/urun.svg',
+                                  semanticsLabel: 'Urun',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.brown, BlendMode.srcIn),
+                                ),
+                                label: 'Urun'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/pembiayaan-porsi-haji.svg',
+                                  semanticsLabel: 'Pembiayaan Porsi Haji',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.green, BlendMode.srcIn),
+                                ),
+                                label: 'Pembiayaan Porsi Haji'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/financial-check-up.svg',
+                                  semanticsLabel: 'Financial Check Up',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Color(0xffF6C20A), BlendMode.srcIn),
+                                ),
+                                label: 'Financial Check Up'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/asuransi-mobil.svg',
+                                  semanticsLabel: 'Asuransi Mobil',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.blueGrey, BlendMode.srcIn),
+                                ),
+                                label: 'Asuransi Mobil'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/asuransi-properti.svg',
+                                  semanticsLabel: 'Asuransi Properti',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.red, BlendMode.srcIn),
+                                ),
+                                label: 'Asuransi Properti'),
+                          ],
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 5),
-                      height: 200,
-                      child: ResponsiveGridView(
-                        items: [
-                          GridItem(icon: Icons.home, label: 'Hobi'),
-                          GridItem(icon: Icons.search, label: 'Merchandise'),
-                          GridItem(
-                              icon: Icons.notifications,
-                              label: 'Gaya Hidup Sehat'),
-                          GridItem(
-                              icon: Icons.message, label: 'Konseling & Rohani'),
-                          GridItem(
-                              icon: Icons.person, label: 'Self Development'),
-                          GridItem(
-                              icon: Icons.notifications,
-                              label: 'Perencanaan Keuangan'),
-                          GridItem(
-                              icon: Icons.message, label: 'Konsultasi Medis'),
-                          GridItem(icon: Icons.person, label: 'Lihat Semua'),
-                        ],
+                      const Padding(
+                        padding:
+                            EdgeInsetsDirectional.symmetric(horizontal: 15),
+                        child: Text(
+                          "Kategori Pilihan",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 5),
+                        height: 300,
+                        child: ResponsiveGridView(
+                          items: [
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/hobi.svg',
+                                  semanticsLabel: 'Hobi',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.blue, BlendMode.srcIn),
+                                ),
+                                label: 'Hobi'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/merchandise.svg',
+                                  semanticsLabel: 'Merchandise',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.blue, BlendMode.srcIn),
+                                ),
+                                label: 'Merchandise'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/gaya-hidup-sehat.svg',
+                                  semanticsLabel: 'Gaya Hidup Sehat',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.red, BlendMode.srcIn),
+                                ),
+                                label: 'Gaya Hidup Sehat'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/konseling-rohani.svg',
+                                  semanticsLabel: 'Konseling & Rohani',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.blue, BlendMode.srcIn),
+                                ),
+                                label: 'Konseling & Rohani'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/self-development.svg',
+                                  semanticsLabel: 'Self Development',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.purple, BlendMode.srcIn),
+                                ),
+                                label: 'Self Development'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/perencanaan-keuangan.svg',
+                                  semanticsLabel: 'Perencanaan Keuangan',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.green, BlendMode.srcIn),
+                                ),
+                                label: 'Perencanaan Keuangan'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/konsultasi-medis.svg',
+                                  semanticsLabel: 'Konsultasi Medis',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.green, BlendMode.srcIn),
+                                ),
+                                label: 'Konsultasi Medis'),
+                            GridItem(
+                                icon: SvgPicture.asset(
+                                  'assets/home/lihat-semua.svg',
+                                  semanticsLabel: 'Lihat Semua',
+                                  height: iconSize,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.grey, BlendMode.srcIn),
+                                ),
+                                label: 'Lihat Semua'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _menuBar(BuildContext context) {
+    const double borderRadius = 25.0;
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 30),
+      child: Container(
+        width: 400.0,
+        height: 40.0,
+        decoration: const BoxDecoration(
+          color: Color(0XFFF6F8F7),
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(
+              child: InkWell(
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(borderRadius)),
+                onTap: () {
+                  setState(() {
+                    activePageIndex = 0;
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: (activePageIndex == 0)
+                      ? const BoxDecoration(
+                          color: Color(0xffF6C20A),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(borderRadius)),
+                        )
+                      : null,
+                  child: Text(
+                    "Payuung Pribadi",
+                    style: (activePageIndex == 0)
+                        ? const TextStyle(color: Colors.white)
+                        : const TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: InkWell(
+                borderRadius:
+                    const BorderRadius.all(Radius.circular(borderRadius)),
+                onTap: () {
+                  setState(() {
+                    activePageIndex = 1;
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: (activePageIndex == 1)
+                      ? const BoxDecoration(
+                          color: Color(0xffF6C20A),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(borderRadius)),
+                        )
+                      : null,
+                  child: Text(
+                    "Payuung Karyawan",
+                    style: (activePageIndex == 1)
+                        ? const TextStyle(color: Colors.white)
+                        : const TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

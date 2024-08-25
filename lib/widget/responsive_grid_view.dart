@@ -14,15 +14,14 @@ class ResponsiveGridView extends StatelessWidget {
         // Determine the number of columns based on screen width
         int columns = (constraints.maxWidth / 150).floor();
         columns = columns < 4 ? 4 : columns; // Minimum 2 columns
-
         return GridView.builder(
           shrinkWrap: true,
-          // physics:
-          //     const NeverScrollableScrollPhysics(), // Prevent GridView from scrolling
+          physics:
+              const NeverScrollableScrollPhysics(), // Prevent GridView from scrolling
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: columns,
             crossAxisSpacing: 8.0, // Horizontal spacing
-            mainAxisSpacing: 1.0, // Vertical spacing
+            mainAxisSpacing: 8.0, // Vertical spacing
             childAspectRatio: 1.2, // Aspect ratio of each grid item
           ),
           padding: const EdgeInsets.all(8.0),
@@ -31,11 +30,7 @@ class ResponsiveGridView extends StatelessWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  items[index].icon,
-                  // color: Colors.white,
-                  size: 30.0,
-                ),
+                items[index].icon,
                 const SizedBox(height: 8.0),
                 Expanded(
                   child: Text(
@@ -57,7 +52,7 @@ class ResponsiveGridView extends StatelessWidget {
 }
 
 class GridItem {
-  final IconData icon;
+  final Widget icon;
   final String label;
 
   GridItem({required this.icon, required this.label});
